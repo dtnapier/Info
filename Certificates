@@ -1,0 +1,22 @@
+GoDaddy provides a .crt file.  
+On MARS-DC1 go to IIS > Server Certificates > Complete CSR to install the certificate.  
+Export it to get the .pfx file. For password use MidAmerica20xx (the year).  
+To get a .key file, install OpenSSL on your computer 
+Open Admin cmd 
+cd C:\Program Files\OpenSSL-Win64\bin 
+openssl pkcs12 -in <pfxfile>.pfx -nocerts -out key.pem -nodes 
+openssl rsa -in key.pem -out server.key 
+Now you have a .crt, .pfx, and .key file.  
+
+To change on the web servers go to IIS > Server Certificates > Complete CSR. Use the .crt file.  
+Then go to the sites and Edit Bindings. Check every one and change the certificate as necessary.  
+When done you can remove the old certificate.  
+
+Tableau requires a .crt file, a .key file, and a .cer file (SSL certificate chain file).  .cer is static.  
+
+Fortinet requires the .pfx file on both VPN and HTTPS settings.  
+
+Other Certificate commands 
+Get-Adfsproperties 
+
+Get-ChildItem -path cert:\LocalMachine\M 
